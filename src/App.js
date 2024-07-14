@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+import ErrorPage from "./error-page.js";
+import Users from './components/users-list.component.js';
+import UserForm from './components/user-form.component.js';
+
+function App()
+{
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Router>
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark sticky-top">
+          <a href="/users" className="navbar-brand">
+            &nbsp;&nbsp;Usermanager
+          </a>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/users"} className="nav-link">Users</Link>
+            </li>
+          </div>
+        </nav>
 
+        <div id="page-content-wrapper">
+          <div className="container-fluid">
+
+            <div className="container mt-3">
+              <Routes>
+                <Route path="/users" element={<Users />} />
+                <Route path="/users/:id" element={<UserForm />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Router>
+  );
+
+}
 export default App;
